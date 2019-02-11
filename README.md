@@ -4,7 +4,7 @@ This workflow installs a Service (or Quick Action) which accepts text from any a
 
 To use:
 
-0. Clone this repo or download a release and untar/unzip.
+0. Clone this repo or download a [release](https://github.com/fuzzylogiq/OpenHEATIncident/releases/latest) and untar/unzip.
 0. Double click on the workflow to install it.
 0. Select text in almost any application and then control (or two finger on a touchpad) click the selected text and choose Services > Open HEAT Incident
 0. If you want you can assign a key combination to the Service in System Preferences > Keyboard > Shortcuts
