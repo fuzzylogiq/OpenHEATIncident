@@ -14,7 +14,7 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Open HEAT Incident</string>
+				<string>Open In HEAT</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>runWorkflowAsService</string>

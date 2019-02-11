@@ -59,11 +59,35 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>re="^.*[[:&lt;:]]([0-9]{8})[[:&gt;:]].*$"
+					<string>INCIDENTRE="^.*[[:&lt;:]](1[0-9]{7})[[:&gt;:]].*$"
+TASKRE="^.*[[:&lt;:]](5[0-9]{7})[[:&gt;:]].*$"
+CHANGERE="^.*[[:&lt;:]](2[0-9]{7})[[:&gt;:]].*$"
+SERVICERE="^.*[[:&lt;:]](3[0-9]{7})[[:&gt;:]].*$"
 
-[[ $@ =~ $re ]] &amp;&amp; INCIDENT=${BASH_REMATCH[1]} || { osascript -e 'display dialog "Sorry, that does not look like an incident number"'; exit 0; }
+if [[ $@ =~ $INCIDENTRE ]]; then
+	type="Incident%23"
+	cmd_data=IncidentNumber
+	rematch=${BASH_REMATCH[1]}
+elif [[ $@ =~ $TASKRE ]]; then
+	type="Task%23Assignment"
+	cmd_data=AssignmentID
+	rematch=${BASH_REMATCH[1]}
+elif [[ $@ =~ $CHANGERE ]]; then
+	type="Change%23"
+	cmd_data=ChangeNumber
+	rematch=${BASH_REMATCH[1]}
+elif  [[ $@ =~ $SERVICERE ]]; then
+	type="ServiceReq%23"
+	cmd_data=ServiceReqNumber
+	rematch=${BASH_REMATCH[1]}
+else
+	osascript -e "display dialog \"Sorry, that doesn't look like something you can open in Oxford IT Services HEAT\" buttons {\"OK\"}"
+	exit 0
+fi
 
-open "https://oxford.saasiteu.com/Default.aspx?Scope=ObjectWorkspace&amp;CommandId=Search&amp;ObjectType=Incident%23&amp;CommandData=IncidentNumber,%3D,0,${INCIDENT}"</string>
+URL="https://oxford.saasiteu.com/Login.aspx?role=ServiceDeskAnalyst&amp;Scope=ObjectWorkspace&amp;CommandId=Search&amp;ObjectType=${type}&amp;CommandData=${cmd_data},%3D,0,${rematch}"
+open "${URL}"
+</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -178,7 +202,7 @@ open "https://oxford.saasiteu.com/Default.aspx?Scope=ObjectWorkspace&amp;Command
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>267.000000:305.000000</string>
+				<string>267.000000:595.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
