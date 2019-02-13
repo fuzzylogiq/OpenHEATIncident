@@ -10,3 +10,7 @@ To use:
 0. If you want you can assign a key combination to the Service in System Preferences > Keyboard > Shortcuts
 
 These workflows are provided without support, use at your own discretion. Tested on 10.14 Mojave only.
+
+To remove:
+
+Delete the workflow folder(s) from ~/Library/Services/
